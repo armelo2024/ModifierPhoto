@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block title %}Studio{% endblock %}
+<!--  -->
+{% block content %}
+<h2 class="telechargement">Télécharger Une Photo</h2>
+
+<form id="upload-form" method="post" enctype="multipart/form-data" class="mt-3">
+    {% csrf_token %}
+    <div class="mb-3 border border-2 border-secondary p-4 text-center rounded" id="drop-zone">
+        <p class="text-muted">Glissez-déposez votre image ici ou cliquez pour sélectionner</p>
+        <input type="file" name="image" id="id_image" class="form-control d-none" accept="image/*" required>
+        <img id="preview-img" class="img-fluid mt-3 d-none" style="max-height: 300px;" />
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-3">
+            <label class="form-label">Couleur de fond</label>
+            <input type="color" name="bg_color" id="bg_color_picker" value="#FFFFFF" class="form-control form-control-color" />
+        </div>
+        <div class="col-md-3 form-check align-self-end">
+            <input class="form-check-input" type="checkbox" name="is_transparent" id="transparent">
+            <label class="form-check-label" for="transparent">Transparent (PNG)</label>
+        </div>
+        <div class="col-md-6 align-self-end">
+            <button class="btn btn-primary w-100" type="submit">Lancer</button>
+        </div>
+    </div>
+
+    <div class="progress mt-4 d-none" id="progress-container">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%;" id="progress-bar"></div>
+    </div>
+</form>
+
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('id_image');
+    const previewImg = document.getElementById('preview-img');
+    const colorPicker = document.getElementById('bg_color_picker');
+    const transparentCheckbox = document.getElementById('transparent');
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar');
+
+    // Drag & drop
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => {
+        e.preventDefault();
+        dropZone.classList.add('bg-light');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('bg-light'));
+    dropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        dropZone.classList.remove('bg-light');
+        fileInput.files = e.dataTransfer.files;
+        showPreview(fileInput.files[0]);
+    });
+
+    // Preview quand on choisit un fichier
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            showPreview(fileInput.files[0]);
+        }
+    });
+
+    // Fonction pour afficher la prévisualisation
+    function showPreview(file) {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                previewImg.src = e.target.result;
+                previewImg.classList.remove('d-none');
+                applyBgColor();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Appliquer la couleur de fond sur l'image preview
+    colorPicker.addEventListener('input', applyBgColor);
+    transparentCheckbox.addEventListener('change', applyBgColor);
+
+    function applyBgColor() {
+        if (transparentCheckbox.checked) {
+            previewImg.style.background = 'transparent';
+        } else {
+            previewImg.style.background = colorPicker.value;
+        }
+    }
+
+    // Barre de progression (simple simulation côté client)
+    document.getElementById('upload-form').addEventListener('submit', () => {
+        progressContainer.classList.remove('d-none');
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress = Math.min(progress + 10, 100);
+            progressBar.style.width = progress + '%';
+            if (progress >= 100) clearInterval(interval);
+        }, 200);
+    });
+</script>
+
+{% endblock %}

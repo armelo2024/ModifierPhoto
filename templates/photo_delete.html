@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block title %}Confirmer la suppression{% endblock %}
+<!--  -->
+{% block content %}
+<h2>Supprimer la photo</h2>
+<p>Voulez-vous vraiment supprimer cette photo ?</p>
+<img src="{{ photo.processed_image.url }}" class="img-fluid mb-3" alt="photo" />
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Oui, supprimer</button>
+    <a href="{% url 'gallery' %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,57 @@
+h2.telechargement {
+    text-align: center;
+    color: blue;
+    margin: 20px;
+}
+
+h2.modifiez {
+    text-align: center;
+    margin: 20px;
+    color: black;
+}
+
+footer.footer {
+    color: black;
+}
+
+body.body {
+    background-color: rgb(174, 245, 245);
+}
+
+h1.transforme {
+    animation-name: animationh1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+p.transforme {
+    animation-name: animationh1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animationh1 {
+    0% {
+        opacity: 0;
+        color: black;
+    }
+    100% {
+        opacity: 1;
+        color: #fff;
+    }
+}
+
+button.btn-primary {
+    animation-name: lumiere;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes lumiere {
+    0% {
+        background: blue;
+    }
+    100% {
+        background: indianred;
+    }
+}
