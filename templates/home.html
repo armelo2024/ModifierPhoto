@@ -49,9 +49,12 @@
             flex-direction: column;
             text-align: center;
             height: 80vh;
-            background: linear-gradient(135deg, #6c63ff 0%, #5848d6 100%);
+            background-image: url('https://i.pinimg.com/1200x/fb/73/13/fb7313b1c61a5c01e8aca3e5374f278d.jpg');
+            /* background: linear-gradient(135deg, #6c63ff 0%, #5848d6 100%); */
             color: #fff;
             padding: 0 20px;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         
         .hero h1 {
@@ -130,8 +133,8 @@
         <h1 class="transforme">Transformez vos photos en quelques secondes</h1>
         <p class="transforme">Supprimez l’arrière-plan, modifiez et téléchargez vos images facilement, le tout depuis votre navigateur.</p>
         <div class="d-flex gap-3 flex-wrap justify-content-center">
-            <a href="{% url 'studio' %}" class="btn btn-light btn-cta">🚀 Accéder au Studio</a>
-            <a href="{% url 'gallery' %}" class="btn btn-outline-light btn-cta">📁 Voir ma Galerie</a>
+            <a href="{% url 'studio' %}" class="btn btn-light btn-cta"> Accéder au Studio</a>
+            <a href="{% url 'gallery' %}" class="btn btn-outline-light btn-cta"> Voir ma Galerie</a>
         </div>
     </section>
 

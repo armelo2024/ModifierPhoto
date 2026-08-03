@@ -3,30 +3,6 @@
 {% block title %}Galerie{% endblock %}
 <!--  -->
 {% block content %}
-<!-- <div class="container mt-4">
-    <h2>Mes photos modifiées</h2>
-    <div class="row">
-        {% for photo in photos %}
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <img src="{{ photo.processed_image.url }}" class="card-img-top" alt="Photo modifiée">
-                <div class="card-body text-center">
-                    <a href="{{ photo.processed_image.url }}" download class="btn btn-success">
-                            📥 Télécharger
-                        </a>
-                    <form action="{% url 'photo_delete' photo.id %}" method="post" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">🗑 Supprimer</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <p>Aucune photo modifiée pour le moment.</p>
-        {% endfor %}
-    </div>
-</div> -->
-
 
 <div class="container mt-4">
     <h2 class="modifiez">Mes Photos Modifiées</h2>
